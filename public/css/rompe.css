@@ -1,0 +1,15 @@
+
+.menu{background-color: white; padding: 15px; position: fixed;top: 0; width: 100%;box-shadow: 2px 2px 10px gray}
+
+#regresar{font-size: 20pt; text-align: center;display: block; padding: 10px; text-decoration: none}
+
+.personajes{
+	text-align: center; display: block;
+	align-items: center;
+	padding: 50px;
+	border: 2px;
+}
+
+#table{
+	align-content: center;
+}

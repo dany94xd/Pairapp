@@ -1,0 +1,127 @@
+/* Imagen utilizada por defecto, la que se utlizará en pantallas pequeñas
+ * Puestas todas las propiedades por separado por motivos ilustrativos
+ */
+
+/*@-webkit-keyframes animar {
+            0% {
+                -webkit-transform: translate(0px, 0px);
+            }
+            10% {
+                -webkit-transform: translate(20px, 0px);
+            }
+            20% {
+                -webkit-transform: translate(0px, 0px);
+            }
+            30% {
+                -webkit-transform: translate(20px, 0px);
+            }
+            40% {
+                -webkit-transform: translate(0px, 0px);
+            }
+            50% {
+                -webkit-transform: translate(20px, 0px);
+            }
+            60% {
+                -webkit-transform: translate(0px, 0px);
+            }
+            70% {
+                -webkit-transform: translate(20px, 0px);
+            }
+            80% {
+                -webkit-transform: translate(0px, 0px);
+            }
+            90% {
+                -webkit-transform: translate(20px, 0px);
+            }
+            100% {
+                -webkit-transform: translate(0px, 0px);
+            }
+        }
+
+    .temblor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    right: 50%;
+
+    }
+
+    .temblor:hover {
+        -webkit-animation: animar .6s 1;
+    }
+*/
+
+#bienvenida{
+    color: #ab4924;font-family: 'Vibur', cursive;font-size: 30pt;font-weight: 900;text-align: center;}
+#bienvenida span {font-size: 22pt}
+
+/*centra en medio las cosas*/
+    .centrado-porcentual {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    }
+
+
+    .lista-img {
+    width: 100px;
+}
+
+/*para imagen de fondo*/
+body{
+	background: url("../images/iniciar.jpg") no-repeat center center fixed;
+/*background-color: #BDBDBD;*/
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+/*brillo a la imagen color azul*/
+.imagen:hover{
+
+box-shadow: 0px 0px 5px 5px #2E9AFE;
+-webkit-box-shadow: 0px 0px 5px 5px #2E9AFE;
+transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+}
+
+
+.item-excursion {
+    text-align: center;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.title {
+    width: 100%;
+}
+
+.oculto {
+    display: none;
+}
+.video {
+    max-width: 100%;
+}
+
+.adminLink{position: fixed;bottom: 5px;right: 0;}
+
+.adminLink a{color: white; text-decoration: none;margin: 20px;font-weight: bold}
+
+.btnp{background-color: #f73859;padding: 25px 50px;border-radius: 50px;border: none}
+.btn{background-color: #f73859;padding: 10px 20px;border-radius: 20px;border: none}
+
+.btn-dimensiones{
+  width: 200px;
+/*  background-color: red;*/
+  display: flex;
+  justify-content: center;
+}
+
+.linkRegresar{text-align: center;display: block;color: white}
+
+

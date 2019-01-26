@@ -1,0 +1,70 @@
+body {
+/*margin-top: 3em;*/
+/*padding: 50px;*/
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+background-image: url("../img/iniciar.jpg") ;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-position: center; 
+background-size: cover;
+min-height: 100vh;
+height: 100vh;	
+
+}
+
+
+
+a {
+  color: #00B7FF;
+}
+/****avatar.html******/
+#avatares {
+  margin-top: 100px; 
+  margin-bottom: 15px;
+  border-collapse: collapse
+}
+
+
+.imgSize{
+  width: 150px;
+  height: 150px;
+}
+/***********/
+
+/****felicidades.html******/
+#idPremiacion {
+  margin-top: 100px; 
+  margin-bottom: 15px;
+  border-collapse: collapse
+}
+/***********/
+
+
+.img-perfil {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+iframe {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.nuevo{
+  display: none;
+}
+.niveles{
+  display: none;
+}
+
+.editar{
+  display: none;
+}
+ 
+#listar{padding-top: 150px;margin: 80px 20px;padding: 20px; box-shadow: 1px 1px 15px gray;background-color: white}
+
+.opacar img {
+filter:alpha(opacity=50);
+-moz-opacity: 0.5;
+opacity: 0.5;}
+/*.menu{background-color: white; padding: 15px; position: fixed;top: 0; width: 100%;box-shadow: 2px 2px 10px gray}*/

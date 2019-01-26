@@ -1,0 +1,45 @@
+<script>
+if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') == undefined){
+    window.location = "/login";
+    console.log("login")
+}</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="navbar-brand" src="../../images/logopairapp.png">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/admin">Admin</a></li>
+      <li ><a href="/usuarios">Usuarios</a></li>
+      <li ><a href="/partidas">Partidas</a></li>
+      <li ><a href="/imagenes">Imagenes</a></li>
+    </ul>
+  </div>
+</nav> 
+
+<form class="form" action="/imagenes/{{imagenes.id}}?_method=PUT" method="post">
+  <div class="form-group">
+    <label for="puntaje">Puntaje:</label>
+    <input type="text" class="form-control" id="puntaje" placeholder="Puntaje de la carta" name="puntaje" value="{{imagenes.puntaje}}">
+  </div>
+    <div class="form-group">
+    <label for="title">Foto:</label>
+    <input type="file" class="form-control" id="fotoavatar_editar">
+  </div>
+  <div class="form-group">
+    <img src="{{imagenes.fotoavatar}}" id="img_fotoavatar" width="100" height="100">
+    <input type="input" class="form-control hidden" id="img_fotoavatar_" name="input_fotoavatar" value="{{imagenes.fotoavatar}}">
+  </div>
+  <!--<div class="form-group">
+    <img src="" alt="" id="foto_perfil_">
+  </div>-->
+  <button type="submit" class="btn btn-default btn-success">
+    Actualizar Datos
+  </button>
+</form>
+
+{{#each scripts}}
+  <script src="{{script}}"></script>
+{{/each}}

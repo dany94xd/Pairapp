@@ -1,0 +1,5 @@
+#contenedor-pregunta{ background-color: white; width: 95%;margin: 0 auto;box-shadow: 0 0 30em; position: absolute;top: 100px}
+
+.btnpl{background-color: #f8c43a; padding: 15px 20px; border-radius: 25px;border: 5px solid darkorange}
+
+.btnpl-preg{background-color: red; padding: 15px 20px; border-radius: 25px;border: 5px solid yellow}

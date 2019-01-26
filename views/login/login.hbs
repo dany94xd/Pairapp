@@ -1,0 +1,27 @@
+
+<div class="container-fluid">
+    <div id="login-form" class="oculto">
+        <div class="card text-white bg-dark mb-2 centrado-porcentual" >
+            <h3 class="card-header">Bienvenido! Ingresa tus datos</h3>
+            <div class="card-body">
+                <div class="col-12">
+                    <img src="images/cuenta.png" width="150px" style="display: block;margin: 0px auto"><br>
+
+<form class="form" action="/login" method="post">
+                  <input class="form-control" type="text" id="user" placeholder="Usuario..." name="usuario"><br>
+                   <input class="form-control" type="password" id="clave" placeholder="Contraseña..." name="clave"><br>
+                    <button type="submit" class="btn btn-primary col-12" id="login">Iniciar Sesión</button><br><br>
+
+</form>
+<a class="col-12 linkRegresar" href="/">Regresar a inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    if(localStorage.getItem('usuario') != null && localStorage.getItem('usuario') != undefined){
+    window.location = "./admin";
+}
+</script>

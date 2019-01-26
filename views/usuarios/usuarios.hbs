@@ -1,0 +1,52 @@
+<script>
+if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') == undefined){
+    window.location = "/login";
+    console.log("login")
+}</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="navbar-brand" src="../../images/logopairapp.png">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/admin">Admin</a></li>
+      <li ><a href="/usuarios">Usuarios</a></li>
+      <li ><a href="/partidas">Partidas</a></li>
+      <li ><a href="/imagenes">Imagenes</a></li>
+    </ul>
+  </div>
+</nav> 
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Foto de Perfil</th>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th>Rol</th>
+    </tr>
+    </thead>
+    <tbody>
+  {{#each usuarios}}
+    <tr>
+        <td><img src="{{foto}}" class="img-perfil" width="50" height="50"></td>
+        <td>{{nombre}}</td>
+        <td>{{usuario}}</td>
+        <td>{{rol}}</td>
+        <td><a href="/usuarios/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
+        <td><a href="/usuarios/{{id}}" class="btn btn-primary" role="button">Ver</a></td>
+    </tr>
+  {{/each}}
+    </tbody>
+</table>
+
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <a type="button" class="btn btn-default btn-primary" href="/usuarios/agregar">Nuevo Usuario</a>
+  </div>
+</div>
+

@@ -1,0 +1,40 @@
+body {
+  margin-top: 3em;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.img-perfil {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+iframe {
+  max-width: 100%;
+  max-height: 100%;
+
+}
+
+.float-right {
+  float: right;
+}
+
+.ver_cap {
+  cursor: pointer;
+  text-decoration: underline;
+  color: steelblue;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
+.ver_cap:hover {
+text-decoration: none;
+color:  dimgray;
+}
+
+ 

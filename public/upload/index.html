@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+</head>
+<body>
+
+
+
+<form action="/upload" method="post" enctype="multipart/form-data" id="formulario-audio">
+
+    <!--<input type="file" name="archivo" id="archivo" accept="image/x-png,image/jpeg">-->
+
+    <h1>Solo se permite mp3</h1>
+    <input type="file" name="archivo" id="archivo" accept="audio/mp3">
+    
+
+</form>
+<button id="enviar">Enviar</button>
+
+</body>
+<script>
+    $('#enviar').click(function(){
+        validarFormatoAudio();
+    })
+
+    /*$('#enviar').click(function() {
+        validarFormatoImagen();
+    })*/
+
+    function validarFormatoImagen(){
+
+        var fileName = document.getElementById("archivo").value;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+            $("#formulario-audio").submit();
+        }else{
+            alert("Solo archivos jpg/jpeg/png");
+        }   
+    }
+    function validarFormatoAudio(){
+
+        var fileName = document.getElementById("archivo").value;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile=="mp3"){
+
+            $("#formulario-audio").submit();
+
+        }else{
+            alert("Solo archivos mp3");
+        }   
+    }
+        
+        
+        </script>
+</html>

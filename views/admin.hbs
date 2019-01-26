@@ -1,0 +1,32 @@
+
+
+<script src="./js/validar.js"></script>
+
+<div class="row justify-content-between bg-light modal-body" id="menu">
+
+    <div><img src="images/logopairapp.png" width="250px"></div>
+    <div class=" text-right rem">
+       <a href="/" id="salir" class="btn btn-danger"><span class="fa fa-sign-out"></span>Salir</a>
+    </div>
+        
+    <div class="text-left rem">
+        <h1>Bienvenido a la sección del administrador</h1>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <a href="/usuarios" class="btn btn-primary btn-block">Usuarios</a>
+    <br>
+    <a href="/partidas" class="btn btn-primary btn-block">Partidas</a>
+    <br>
+    <a href="/imagenes" class="btn btn-primary btn-block">Imagenes</a> 
+</div>
+
+<script>
+    $("#salir").on('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem("usuario")
+        window.location = "/"
+        console.log("Hola")
+    })
+</script>

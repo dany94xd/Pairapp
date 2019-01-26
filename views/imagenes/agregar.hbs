@@ -1,0 +1,46 @@
+<script>
+if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') == undefined){
+    window.location = "/login";
+    console.log("login")
+}</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="navbar-brand" src="../../images/logopairapp.png">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/admin">Admin</a></li>
+      <li ><a href="/partidas">Partidas</a></li>
+      <li ><a href="/imagenes">Imagenes</a></li>
+    </ul>
+  </div>
+</nav> 
+
+<form class="form" action="/imagenes" method="post">
+<div class="form-group">
+    <label for="title">Foto:</label>
+    <input type="file" class="form-control" id="fotoavatar_editar">
+  </div>
+  <div class="form-group">
+    <input type="input" class="form-control hidden" id="img_fotoavatar_" name="input_fotoavatar">
+  </div>
+  <div class="form-group">
+    <img src="" alt="" id="img_fotoavatar" width="100" height="100">
+  </div>
+
+  <div class="form-group">
+    <label for="puntaje">Puntos:</label>
+    <input type="text" class="form-control" id="puntaje" placeholder="Puntos de imagen" name="puntaje"><!--req.body.name-->
+  </div>
+  
+
+  <button type="submit" class="btn btn-default btn-success">
+    Crear
+  </button>
+</form>
+
+{{#each scripts}}
+  <script src="{{script}}"></script>
+{{/each}}
+

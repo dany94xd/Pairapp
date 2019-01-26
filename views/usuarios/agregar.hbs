@@ -1,0 +1,59 @@
+<script>
+if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') == undefined){
+    window.location = "/login";
+    console.log("login")
+}</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <img class="navbar-brand" src="../../images/logopairapp.png">
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/admin">Admin</a></li>
+      <li ><a href="/usuarios">Usuarios</a></li>
+      <li ><a href="/partidas">Partidas</a></li>
+      <li ><a href="/imagenes">Imagenes</a></li>
+    </ul>
+  </div>
+</nav> 
+
+<form class="form" action="/usuarios" method="post">
+  <div class="form-group">
+    <label for="title">Nombre:</label>
+    <input type="text" class="form-control" id="nombre" placeholder="Nombre Completo" name="nombre"><!--req.body.name-->
+  </div>
+  <div class="form-group">
+    <label for="title">Usuario:</label>
+    <input type="text" class="form-control" id="usuario" placeholder="Usuario" name="usuario"><!--req.body.usuario-->
+  </div>
+  <div class="form-group">
+    <label for="title">Clave:</label>
+    <input type="password" class="form-control" id="clave" placeholder="Usuario" name="clave">
+  </div>
+  <div class="form-group">
+    <label for="priority">Rol</label>
+    <select class="form-control" id="rol" name="rol"><!--req.body.rol-->
+      <option value="A">Rol Administrador</option>
+      <option value="N">Rol Niño</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="title">Foto:</label>
+    <input type="file" class="form-control" id="foto_editar">
+  </div>
+  <div class="form-group">
+    <input type="input" class="form-control hidden" id="img_foto_" name="input_foto">
+  </div>
+  <div class="form-group">
+    <img src="" alt="" id="img_foto" width="100" height="100">
+  </div>
+  <button type="submit" class="btn btn-default btn-success">
+    Crear
+  </button>
+</form>
+
+{{#each scripts}}
+  <script src="{{script}}"></script>
+{{/each}}
+
