@@ -5,6 +5,7 @@
   "engines":{
     "node": "8.11.3"
   },
+"main": "app.js",
   "scripts": {
     "start": "node ./bin/www"
   },
