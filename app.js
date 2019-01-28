@@ -16,7 +16,7 @@ var imagenes = require('./routes/imagenes');
 var partidas = require('./routes/partidas');
 //var capitulos = require('./routes/capitulos');
 //var preguntas = require('./routes/preguntas');
-//var iniciar = require('./routes/iniciar');
+var iniciar = require('./routes/iniciar');
 //var tareas = require('./routes/tareas');
 
 //var noticias = require('./routes/noticias');
@@ -62,6 +62,9 @@ app.use('/login',login);
 app.use('/usuarios',usuarios);
 app.use('/imagenes',imagenes);
 app.use('/partidas',partidas);
+app.use('/iniciar',iniciar);
+app.use('/explicacion',iniciar);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
