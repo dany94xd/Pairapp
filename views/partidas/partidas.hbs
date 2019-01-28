@@ -18,3 +18,31 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
     </ul>
   </div>
 </nav> 
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Usuario</th>
+        <th>puntaje</th>
+    </tr>
+    </thead>
+    <tbody>
+  {{#each partidas}}
+    <tr>
+        <td>{{idusuario}}</td>
+        <td>{{puntaje}}</td>
+        <td><a href="/partidas/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
+        <td><a href="/partidas/{{id}}" class="btn btn-primary" role="button">Ver</a></td>
+    </tr>
+  {{/each}}
+    </tbody>
+</table>
+
+
+
+{{!-- <div class="row">
+  <div class="col-xs-12">
+    <a type="button" class="btn btn-default btn-primary" href="/partidas/agregar">Nuevo Usuario</a>
+  </div>
+</div> --}}
+
