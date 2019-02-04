@@ -21,14 +21,16 @@
     <div class="col-xs-6 col-md-3">
       <h3 class="text-center title bg-info">{{nombre}}</h3>
       <!-- <h2>{{usuario}}</h2> -->
-      <a href="/iniciar/{{id}}" class="thumbnail">
-        <img src="{{foto}}" class="img-perfil img-rounded">
+     <a href="/front/instrucciones" class="thumbnail"> 
+        <img onclick="sesion({{id}})" src="{{foto}}" class="img-perfil img-rounded">
       <h4 class="text-center ">Puntos: {{puntaje}}</h4>
      </a>
-     <a href="/explicacion"> JUagar</a>
 
     </div>
     {{/each}}
   </div>
+
+<script type="text/javascript" src="../js/classAvatar.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
 
 

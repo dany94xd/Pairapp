@@ -14,12 +14,9 @@ var routes = require('./routes/index');
 var usuarios = require('./routes/usuarios');
 var imagenes = require('./routes/imagenes');
 var partidas = require('./routes/partidas');
-//var capitulos = require('./routes/capitulos');
 //var preguntas = require('./routes/preguntas');
-var iniciar = require('./routes/iniciar');
+var front = require('./routes/front');
 //var tareas = require('./routes/tareas');
-
-//var noticias = require('./routes/noticias');
 
 var login = require('./routes/login');
 
@@ -28,10 +25,7 @@ var app = express();
 
 app.use(fileUpload());
 app.use(helmet())
-app.use(frameguard({
-  action: 'allow-from',
-  domain: 'https://www.youtube.com'
-}))
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,8 +56,8 @@ app.use('/login',login);
 app.use('/usuarios',usuarios);
 app.use('/imagenes',imagenes);
 app.use('/partidas',partidas);
-app.use('/iniciar',iniciar);
-app.use('/explicacion',iniciar);
+app.use('/front',front);
+//app.use('/explicacion',iniciar);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
