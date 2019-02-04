@@ -35,9 +35,9 @@ class Juego {
   constructor(images, user) {
     this.tablero = [];
     this.selectedCards = [];
-
+    this.numeroCartas=0;
     this.shownCount = 0;
-
+   this.contCartasGiradas=0;
     this.puntos = 0;
     this.level = 1;
 
@@ -145,6 +145,8 @@ class Juego {
 
     if (cardA.image === cardB.image) {
       juego.puntos += 30;
+      juego.puntos+=card.puntaje;
+      this.contCartasGiradas+=2;
       juego.checkNextLevel();
     } else {
       cardA.hide();
@@ -155,7 +157,8 @@ class Juego {
 
   // Verifica si la puntuación es la suficiente para avanzar de nivel
   checkNextLevel() {
-    if (this.puntos === 60 || this.puntos === 150 || this.puntos === 270 ) {
+if(this.numeroCartas)
+    if (this.numeroCartas === this.contCartasGiradas  ) {
       this.gotoNextLevel();
     }
   }
@@ -211,6 +214,7 @@ class Juego {
     switch (level) {
       case 1:
         maxCards = 4;
+
         break;
       case 2:
         maxCards = 6;
@@ -270,6 +274,7 @@ class Juego {
       default:
         break;
     }
+    this.numeroCartas=maxCards;
     return this.cardsImages.imagenes.slice(0, maxCards);
   }
 }
