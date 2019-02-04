@@ -236,7 +236,7 @@ class Juego {
       }
       console.log(rndIndex);
       levelCardsCount[rndIndex] += 1;
-      const c = new Card(i, this.cardsImages[rndIndex]);
+      const c = new Card(i, this.cardsImages.imagenes[rndIndex]);
       c.setClicker(this.flipCard);
       table.push(c);
     }
@@ -270,7 +270,6 @@ class Juego {
       default:
         break;
     }
-    return this.cardsImages.slice(0, maxCards);
+    return this.cardsImages.imagenes.slice(0, maxCards);
   }
 }
-

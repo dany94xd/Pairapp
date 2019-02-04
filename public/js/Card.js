@@ -1,8 +1,9 @@
-const defaultImage = "img/card.png";
+const defaultImage = "/images/card.png";
 class Card {
   constructor(id, image) {
-    this.image = image;
+    this.image = image.nombre;
     this.id = id;
+    this.puntaje=image.puntaje;
     this.genNode();
   }
 

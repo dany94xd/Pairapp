@@ -12,11 +12,26 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/game', function(req, res, next) {
+    //Pantalla para mostrar todos los usuario con rol 'N' (niño)
 
+        res.render('front/juego');
+});
+router.get('/getimagenes', function(req, res, next) {
+    //Pantalla para mostrar todos los usuario con rol 'N' (niño)
+
+    knex('imagenjuego')
+      .select()
+      .then(imagenes => {
+        if(imagenes!=undefined){
+            res.json({imagenes: imagenes});
+        }
+      });
+});
 
 router.get('/instrucciones',(req, res) => {
     //Pantalla para mostrar todos los usuario con rol 'N' (niño)
-   
+
         res.render('front/instrucciones');
 
 });
@@ -39,7 +54,7 @@ router.get('/consultUserId:id', (req, res) => {
             console.log("vales verga vinces")
         }
     });
-    
+
 });
 
 router.get('/jugar:nivel', (req, res) => {
