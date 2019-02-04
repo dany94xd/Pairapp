@@ -30,14 +30,14 @@ function getColCount(level) {
 
 // var time=0;
 //  var myVar = setInterval(myTimer, 1000);
-
+var contCartasGiradas=0;
 class Juego {
   constructor(images, user) {
     this.tablero = [];
     this.selectedCards = [];
     this.numeroCartas=0;
     this.shownCount = 0;
-   this.contCartasGiradas=0;
+
     this.puntos = 0;
     this.level = 1;
 
@@ -144,9 +144,8 @@ class Juego {
     const cardB = juego.selectedCards.pop();
 
     if (cardA.image === cardB.image) {
-      juego.puntos += 30;
-      juego.puntos+=card.puntaje;
-      this.contCartasGiradas+=2;
+      juego.puntos+=cardA.puntaje;
+      contCartasGiradas++;
       juego.checkNextLevel();
     } else {
       cardA.hide();
@@ -157,8 +156,8 @@ class Juego {
 
   // Verifica si la puntuación es la suficiente para avanzar de nivel
   checkNextLevel() {
-if(this.numeroCartas)
-    if (this.numeroCartas === this.contCartasGiradas  ) {
+    if (this.numeroCartas === contCartasGiradas  ) {
+      contCartasGiradas=0;
       this.gotoNextLevel();
     }
   }
