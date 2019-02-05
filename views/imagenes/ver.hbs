@@ -17,7 +17,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
       <li ><a href="/imagenes">Imagenes</a></li>
     </ul>
   </div>
-</nav> 
+</nav>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -28,10 +28,10 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
     {{imagenes.puntaje}}
   </div>
   <div class="panel-footer">
-    <img src="{{imagenes.fotoavatar}}" alt="" width="200" height="200">
+    <img src="{{imagenes.nombre}}" alt="" width="200" height="200">
   </div>
 
-  
+
 </div>
 
 <form action="/imagenes/{{imagenes.id}}?_method=DELETE" method="post">
@@ -42,4 +42,3 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
   Eliminar
   </button>
 </form>
-

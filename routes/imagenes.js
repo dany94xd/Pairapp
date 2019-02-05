@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 router.get('/agregar', (req, res) => {
     res.render('imagenes/agregar', {scripts: scripts});
   });
-  
+
 
 
   // ver imagenes
@@ -44,16 +44,16 @@ router.get('/:id', (req, res) => {
 //     });
 //     //respondAndRenderTodo(id, res, 'usuarios/ver');
 //   });
-  
+
   router.get('/:id/edit', (req, res) => {
     const id = req.params.id;
     respondAndRenderTodo(id, res, 'imagenes/editar');
   });
-  
+
   //localhost:3000/usuarios/
   router.post('/', (req, res) => {
     validateTodoRenderError(req, res, (imagenes) => {
-      
+
       knex('imagenjuego')
         .insert(imagenes, 'id')
         .then(ids => {
@@ -62,7 +62,7 @@ router.get('/:id', (req, res) => {
         });
     });
   });
-  
+
   router.put('/:id', (req, res) => {
     validateTodoRenderError(req, res, (imagenes) => {
       const id = req.params.id;
@@ -74,7 +74,7 @@ router.get('/:id', (req, res) => {
         });
     });
   });
-  
+
   router.delete('/:id', (req, res) => {
     const id = req.params.id;
     if(validId(id)) {
@@ -94,14 +94,14 @@ router.get('/:id', (req, res) => {
 
   function validateTodoRenderError(req, res, callback) {
     //if(validTodo(req.body)) {
-      
+
       const imagen = {
-        fotoavatar: req.body.input_fotoavatar,
+        nombre: req.body.nombre,
         puntaje: req.body.puntaje
       };
-  
+
       console.log(imagen);
-  
+
       callback(imagen);
     /*} else {
       res.status( 500);
@@ -110,7 +110,7 @@ router.get('/:id', (req, res) => {
       });
     }*/
   }
-  
+
   function respondAndRenderTodo(id, res, viewName) {
     if(validId(id)) {
       knex('imagenjuego')
@@ -128,12 +128,9 @@ router.get('/:id', (req, res) => {
       });
     }
   }
-  
+
   function validId(id) {
     return !isNaN(id);
   }
-  
+
   module.exports = router;
-  
-
-

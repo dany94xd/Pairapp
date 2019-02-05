@@ -12,6 +12,42 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/felicidades', function(req, res, next) {
+console.log("felicidades");
+    res.render('front/felicidades');
+});
+
+
+router.get('/guardarPartida:id:puntos', (req, res) => {
+  const id= req.params.id;
+  const puntos=req.params.puntos;
+console.log(id);
+    knex('partida')
+      .insert({puntaje: puntos, idusuario:id})
+      .then(ids => {
+        res.json("partida guarda");
+      });
+
+});
+
+
+
+
+
+
+router.get('/updateScore:id:puntaje', function(req, res, next) {
+    //Pantalla para mostrar todos los usuario con rol 'N' (niño)
+const idAvatar= req.params.id;
+const puntajeavatar= req.params.puntaje;
+knex("usuario")
+.where("id", idAvatar)
+.update({puntaje: puntajeavatar})
+.then(()=>{
+  res.json("usuario actualizado");
+  });
+
+});
+
 router.get('/game', function(req, res, next) {
     //Pantalla para mostrar todos los usuario con rol 'N' (niño)
 

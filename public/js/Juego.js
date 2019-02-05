@@ -122,15 +122,14 @@ class Juego {
   updateScore() {
     console.log("puntos", this.puntos);
     this.saveScore(); // Guarda el score
-    avatar.puntos= this.puntos;
-    let arrayAvatares= JSON.parse(localStorage.getItem("personajes"));
-    for (var variable in arrayAvatares) {
-      if (arrayAvatares[variable].id==avatar.id) {
-         arrayAvatares[variable].puntos=this.puntos;
-         localStorage.setItem("sesion", JSON.stringify(avatar));
-         localStorage.setItem("personajes", JSON.stringify(arrayAvatares));
-      }
-    }
+
+    var req = new XMLHttpRequest();
+    // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
+    const server=window.location.origin;//atrapa ruta del servidor
+    req.open("GET", server+"/front/updateScore"+avatar.id+avatar.puntaje ,false);
+
+    req.send(null);
+
     this.root.find("#score").text(this.puntos);
   }
 
@@ -145,6 +144,7 @@ class Juego {
 
     if (cardA.image === cardB.image) {
       juego.puntos+=cardA.puntaje;
+      avatar.puntaje= juego.puntos;
       contCartasGiradas++;
       juego.checkNextLevel();
     } else {
@@ -164,7 +164,13 @@ class Juego {
 
   // Avanza a pantalla de resultados
   gotoNextScreen() {
-    window.location.href = "felicidades.html";
+    var req = new XMLHttpRequest();
+    // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
+    const server=window.location.origin;//atrapa ruta del servidor
+    req.open("GET", server+"/front/guardarPartida"+avatar.id+this.puntos ,false);
+
+    req.send(null);
+    window.location.href = "/front/felicidades";
   }
 
   //Guarda la puntuacion en el localstorage

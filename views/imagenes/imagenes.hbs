@@ -17,7 +17,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
       <li ><a href="/imagenes">Imagenes</a></li>
     </ul>
   </div>
-</nav> 
+</nav>
 
 <table class="table table-bordered">
     <thead>
@@ -29,7 +29,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
     <tbody>
   {{#each imagenes}}
     <tr>
-        <td><img src="{{fotoavatar}}" class="img-fotoavatar" width="50" height="50"></td>
+        <td><img src="{{nombre}}" class="img-fotoavatar" width="50" height="50"></td>
         <td>{{puntaje}}</td>
         <td><a href="/imagenes/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
         <td><a href="/imagenes/{{id}}" class="btn btn-primary" role="button">Ver</a></td>
