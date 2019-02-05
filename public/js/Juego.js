@@ -144,14 +144,15 @@ class Juego {
 
     if (cardA.image === cardB.image) {
       juego.puntos+=cardA.puntaje;
-      avatar.puntaje= juego.puntos;
+      avatar.puntaje+= cardA.puntaje;
       contCartasGiradas++;
+      juego.updateScore();
       juego.checkNextLevel();
     } else {
       cardA.hide();
       cardB.hide();
     }
-    juego.updateScore();
+
   }
 
   // Verifica si la puntuación es la suficiente para avanzar de nivel

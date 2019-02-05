@@ -17,7 +17,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
       <li ><a href="/imagenes">Imagenes</a></li>
     </ul>
   </div>
-</nav> 
+</nav>
 
 <form class="form" action="/usuarios/{{usuario.id}}?_method=PUT" method="post">
   <div class="form-group">
@@ -27,6 +27,10 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
   <div class="form-group">
     <label for="title">Usuario:</label>
     <input type="text" class="form-control" id="usuario" value="{{usuario.usuario}}" placeholder="Usuario" name="usuario">
+  </div>
+  <div class="form-group">
+    <label for="title">Puntaje:</label>
+    <input type="number" class="form-control" id="puntaje" placeholder="Puntaje" name="puntaje" value="{{usuario.puntaje}}">
   </div>
   <div class="form-group">
     <label for="title">Clave:</label>

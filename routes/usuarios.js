@@ -47,7 +47,7 @@ router.get('/:id/edit', (req, res) => {
 //localhost:3000/usuarios/
 router.post('/', (req, res) => {
   validateTodoRenderError(req, res, (usuario) => {
-    
+
     knex('usuario')
       .insert(usuario, 'id')
       .then(ids => {
@@ -88,13 +88,14 @@ router.delete('/:id', (req, res) => {
 
 function validateTodoRenderError(req, res, callback) {
   //if(validTodo(req.body)) {
-    
+
     const usuario = {
       nombre: req.body.nombre,
       usuario: req.body.usuario,
       clave: req.body.clave,
       foto: req.body.input_foto,
-      rol: req.body.rol
+      rol: req.body.rol,
+      puntaje: req.body.puntaje
     };
 
     console.log(usuario);

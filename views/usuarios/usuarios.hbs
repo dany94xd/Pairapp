@@ -17,7 +17,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
       <li ><a href="/imagenes">Imagenes</a></li>
     </ul>
   </div>
-</nav> 
+</nav>
 
 <table class="table table-bordered">
     <thead>
@@ -25,6 +25,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
         <th>Foto de Perfil</th>
         <th>Nombre</th>
         <th>Usuario</th>
+          <th>Puntaje</th>
         <th>Rol</th>
     </tr>
     </thead>
@@ -34,6 +35,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
         <td><img src="{{foto}}" class="img-perfil" width="50" height="50"></td>
         <td>{{nombre}}</td>
         <td>{{usuario}}</td>
+          <td>{{puntaje}}</td>
         <td>{{rol}}</td>
         <td><a href="/usuarios/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
         <td><a href="/usuarios/{{id}}" class="btn btn-primary" role="button">Ver</a></td>
@@ -49,4 +51,3 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
     <a type="button" class="btn btn-default btn-primary" href="/usuarios/agregar">Nuevo Usuario</a>
   </div>
 </div>
-

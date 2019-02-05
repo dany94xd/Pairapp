@@ -17,7 +17,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
       <li ><a href="/imagenes">Imagenes</a></li>
     </ul>
   </div>
-</nav> 
+</nav>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -25,6 +25,9 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
   </div>
   <div class="panel-body">
     {{usuario.usuario}}
+  </div>
+  <div class="panel-heading">
+    <h3 class="panel-title">{{usuario.puntaje}}</h3>
   </div>
   <div class="panel-footer">
     <img src="{{usuario.foto}}" alt="" width="200" height="200">
@@ -39,4 +42,3 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
   Eliminar
   </button>
 </form>
-
