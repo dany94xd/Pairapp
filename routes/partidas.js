@@ -7,6 +7,10 @@ const knex = require('../db/knex');
 router.get('/', (req, res) => {
     knex('partida')
       .select()
+      .innerJoin('usuario',function(){
+        this
+        .on('partida.idusuario','usuario.id')
+      })
       .then(partidas => {
         res.render('partidas/partidas', { partidas: partidas });
       });
@@ -16,11 +20,12 @@ router.get('/', (req, res) => {
 //localhost:3000/excursiones/agregar
 router.get('/agregar', (req, res) => {
 
-  knex('partida')
-    .select()
-    //.where('rol', 'N')
-    .then(partidas => {
-      res.render('partidas/agregar', {scripts: scripts,  partidas: partidas });
+  knex('usuario')
+  .whereNotExists(function(){
+    this.select('*').from('partida').whereRaw('partida.idusuario = usuario.id');
+  })
+    .then(usuarios => {
+      res.render('partidas/agregar', {usuarios:usuarios });
     });
 });
 
@@ -43,7 +48,8 @@ router.post('/', (req, res) => {
     
     //excursion.id_user = parseInt(excursion.id_user);
     knex('partida')
-      .insert(partidas, 'id')
+    .returning('id')
+      .insert({puntaje:req.body.puntaje, idusuario:req.body.idusuario})
       .then(ids => {
         const id = ids[0];
         res.redirect(`/partidas/${id}`);
@@ -63,22 +69,39 @@ router.put('/:id', (req, res) => {
   });
 });
 
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  if(validId(id)) {
-    knex('partida')
-      .where('id', id)
-      .del()
-      .then(() => {
-        res.redirect('/partidas');
+router.get('/verRanking', (req, res) => {
+  knex('partida')
+      .select()
+      .innerJoin('usuario', function () {
+      this
+     .on('partida.idusuario', 'usuario.id')
+
+
+})
+    .orderBy('puntaje', 'desc')
+      .limit(10)
+      .then(partidas =>{
+          res.render('front/ranking', {partidas: partidas});
       });
-  } else {
-    res.status( 500);
-    res.render('error', {
-      message:  'Invalid id'
+
     });
-  }
-});
+
+// router.delete('/:id', (req, res) => {
+//   const id = req.params.id;
+//   if(validId(id)) {
+//     knex('partida')
+//       .where('id', id)
+//       .del()
+//       .then(() => {
+//         res.redirect('/partidas');
+//       });
+//   } else {
+//     res.status( 500);
+//     res.render('error', {
+//       message:  'Invalid id'
+//     });
+//   }
+// });
 
 function validateTodoRenderError(req, res, callback) {
 
@@ -92,15 +115,15 @@ function validateTodoRenderError(req, res, callback) {
 
 function respondAndRenderTodo(id, res, viewName) {
   if(validId(id)) {
-    knex('usuarios')
+    knex('usuario')
     .select()
     .then(usuarios => {
       knex('partida')
       .select()
       .where('id', id)
       .first()
-      .then(excursion => {
-        res.render(viewName,{partidas: partidas, scripts: scripts, usuarios: usuarios} );
+      .then(partidas => {
+        res.render(viewName,{partidas: partidas, usuarios: usuarios} );
       });
     });
 
