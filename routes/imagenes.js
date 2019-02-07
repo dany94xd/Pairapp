@@ -32,18 +32,7 @@ router.get('/:id', (req, res) => {
   });
 
 
-  //localhost:3000/usuarios/1/puntos
-// router.get('/:id/puntos', (req, res) => {
 
-//     const id = req.params.id;
-//     console.log(id)
-//     knex('usuario')
-//     .increment('puntaje', 1)
-//     .where('id', id).then((user)=>{
-//       res.json(user)
-//     });
-//     //respondAndRenderTodo(id, res, 'usuarios/ver');
-//   });
 
   router.get('/:id/edit', (req, res) => {
     const id = req.params.id;
@@ -96,7 +85,7 @@ router.get('/:id', (req, res) => {
     //if(validTodo(req.body)) {
 
       const imagen = {
-        nombre: req.body.nombre,
+        nombre: req.body.input_nombre,
         puntaje: req.body.puntaje
       };
 

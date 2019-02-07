@@ -24,30 +24,6 @@ var conten=document.getElementById("contenAvatares");
 //var imagenesJson=JSON.parse(localStorage.getItem("imagenes"));
 var mostra="";
 
-/*for (var img in datos) {
-  var celda = document.createElement("div");
-  var puntos= document.createElement("h4");
-    celda.className="misavatares";
-    //esto como es un arreglo datos[]
-  puntos.textContent=datos[img].puntos+" puntos";
-  var imagenAvatar = document.createElement("img");
-  if(datos[img].nombre.substring(0,4)=="data"){
-    imagenAvatar.src=datos[img].nombre;
-    imagenAvatar.className="rounded-circle";
-  }else
-  imagenAvatar.src='../img/'+datos[img].nombre+'';
-  imagenAvatar.setAttribute("onclick","sesion("+img+")");
-  var link = document.createElement("a");
- link.href='video.html';
-//le metemos los valores al div celda es um div
-celda.appendChild(puntos);
-celda.appendChild(link);
-
-link.appendChild(imagenAvatar);
-conten.appendChild(celda); //agrega los avatares
-
-//console.log(datos[img]);
-}*/
 
 //crea una variable avatar
 function sesion(indice){

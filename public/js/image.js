@@ -33,9 +33,9 @@ if($('#foto_editar').length) {
 
 }
 
-if($('#fotoavatar_editar').length) {
-    $("#fotoavatar_editar").change(function(){
-        readURL(this, "img_fotoavatar", true);
+if($('#nombre_editar').length) {
+    $("#nombre_editar").change(function(){
+        readURL(this, "img_nombre", true);
     });
 
 }

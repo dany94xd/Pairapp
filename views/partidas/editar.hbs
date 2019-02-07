@@ -19,16 +19,12 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
   </div>
 </nav>
 
-<form class="form" action="/partidas/{{partida.id}}?_method=PUT" method="post">
+<form class="form" action="/partidas/{{partidas.id}}?_method=PUT" method="post">
 
- <div class="form-group">
-    <label for="idusuario">Usuario:</label>
-    <input type="text" class="form-control" id="idusuario" placeholder="Usuario" name="idusuario" value="{{partida.puntaje}}">
-  </div>
 
   <div class="form-group">
     <label for="puntaje">Puntaje:</label>
-    <input type="text" class="form-control" id="puntaje" placeholder="Puntaje de la carta" name="puntaje" value="{{partida.puntaje}}">
+    <input type="text" class="form-control" id="puntaje" placeholder="Puntaje de la partida" name="puntaje" value="{{partida.puntaje}}">
   </div>
   <!--<div class="form-group">
     <img src="" alt="" id="foto_perfil_">

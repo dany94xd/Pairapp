@@ -6,10 +6,10 @@ const knex = require('../db/knex');
 
 router.get('/', (req, res) => {
     knex('partida')
-      .select()
-      .innerJoin('usuario',function(){
-        this
-        .on('partida.idusuario','usuario.id')
+    .select("partida.id", "partida.puntaje", "partida.idusuario", "usuario.id as usuario.id_usuario", "usuario.foto", "usuario.nombre", "usuario.puntaje")
+    .innerJoin('usuario', function () {
+    this
+    .on('partida.idusuario','usuario.id')
       })
       .then(partidas => {
         res.render('partidas/partidas', { partidas: partidas });
@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 
 //localhost:3000/excursiones/agregar
 router.get('/agregar', (req, res) => {
-
   knex('usuario')
   .whereNotExists(function(){
     this.select('*').from('partida').whereRaw('partida.idusuario = usuario.id');
@@ -58,50 +57,34 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  validateTodoRenderError(req, res, (partidas) => {
-    const id = req.params.id;
+  //validateTodoRenderError(req, res, (partidas) => {
+  //  const id = req.params.id;
     knex('partida')
-      .where('id', id)
-      .update(partidas, 'id')
+      .where('id', req.params.id)
+      .update({puntaje: req.body.puntaje})
       .then(() => {
-        res.redirect(`/partidas/${id}`);
+        res.redirect(`/partidas/${req.params.id}`);
       });
   });
-});
-
-router.get('/verRanking', (req, res) => {
-  knex('partida')
-      .select()
-      .innerJoin('usuario', function () {
-      this
-     .on('partida.idusuario', 'usuario.id')
+//});
 
 
-})
-    .orderBy('puntaje', 'desc')
-      .limit(10)
-      .then(partidas =>{
-          res.render('front/ranking', {partidas: partidas});
+router.delete('/:id', (req, res) => {
+   const id = req.params.id;
+  if(validId(id)) {
+     knex('partida')
+       .where('id', id)
+       .del()
+       .then(() => {
+         res.redirect('/partidas');
       });
-
+  } else {
+    res.status( 500);
+    res.render('error', {
+      message:  'Invalid id'
     });
-
-// router.delete('/:id', (req, res) => {
-//   const id = req.params.id;
-//   if(validId(id)) {
-//     knex('partida')
-//       .where('id', id)
-//       .del()
-//       .then(() => {
-//         res.redirect('/partidas');
-//       });
-//   } else {
-//     res.status( 500);
-//     res.render('error', {
-//       message:  'Invalid id'
-//     });
-//   }
-// });
+  }
+});
 
 function validateTodoRenderError(req, res, callback) {
 
@@ -115,17 +98,14 @@ function validateTodoRenderError(req, res, callback) {
 
 function respondAndRenderTodo(id, res, viewName) {
   if(validId(id)) {
-    knex('usuario')
+    knex('partida')
     .select()
-    .then(usuarios => {
-      knex('partida')
-      .select()
       .where('id', id)
       .first()
       .then(partidas => {
-        res.render(viewName,{partidas: partidas, usuarios: usuarios} );
+        res.render(viewName,{partidas: partidas} );
       });
-    });
+    
 
     
   } else {

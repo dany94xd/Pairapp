@@ -1,18 +1,29 @@
+<title>Ranking </title>
+  <link rel="stylesheet" href="/css/main.css">
 <body>
-<a href="/">Regresar al menú</a>
-<div class="">
+    <button type="button" class="btn btn-warning" > <a id="" href="/front" style= "color:white; font-weight: 600;">Regresar al menú</a></button> 
+
+<div class="ranking-container">
+    <div class="">
+        
 {{#each partidas}}
 <div class="padre">
+    <div class="hijo">
+    <h2  class="puntaje" style="font-family:monospace; color:black; font-weight:900; font-size:20px;">{{ranking}}</h2>
+
+  </div>
+    
+    
   <div class="hijo">
-    <h2>{{ranking}}</h2>
+    <h2  class="puntaje" style="font-family:monospace; color:black; font-weight:900; font-size:20px;">{{ranking}}</h2>
 
   </div>
   <div class="hijo">
-    <h2>{{puntaje}}</h2>
+    <h2  class="puntaje" style="font-family:monospace; color:black; font-weight:900; font-size:30px;">{{puntaje}}</h2>
 
   </div>
   <div class="hijo">
-    <h2>{{nombre}}</h2>
+    <h2  class="puntaje" style="font-family:monospace; color:black; font-weight:900; font-size:30px;">{{nombre}}</h2>
   </div>
   <div class="hijo ">
     <img class="rounded-circle personalImg"src="{{foto}}" alt="foto">
@@ -21,6 +32,12 @@
 
 {{/each}}
 </div>
-
+    </div>
+    
+    
+{{!--     
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> --}}
 
 </body>

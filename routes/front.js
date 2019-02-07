@@ -32,6 +32,20 @@ console.log(id);
 
 
 
+router.get('/verRanking', (req, res) => {
+    knex('partida')
+        .select()
+        .innerJoin('usuario', function () {
+        this
+       .on('partida.idusuario', 'usuario.id')
+    })
+       .orderBy('usuario.puntaje', 'desc')
+        .limit(10)
+        .then(partidas =>{
+            res.render('front/ranking', {partidas: partidas});
+        });
+
+      });
 
 
 
