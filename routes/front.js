@@ -34,12 +34,13 @@ console.log(id);
 
 router.get('/verRanking', (req, res) => {
     knex('partida')
-        .select()
+        .select("partida.id", "partida.puntaje ", "partida.idusuario", "usuario.id as usuario.id_usuario", "usuario.foto",  "usuario.nombre")
         .innerJoin('usuario', function () {
         this
        .on('partida.idusuario', 'usuario.id')
+      
     })
-       .orderBy('usuario.puntaje', 'desc')
+       .orderBy('puntaje', 'desc')
         .limit(10)
         .then(partidas =>{
             res.render('front/ranking', {partidas: partidas});

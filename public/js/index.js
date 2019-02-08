@@ -1,27 +1,10 @@
-// jQuery("body").trigger("click");
-// $(document).ready(function(){
-//   $("body").click(function (){
-//     sonido_bg.volume = 0.3;
-
-//     sonido_bg.play();
-//     escogePersonaje.volume =1;
-//     escogePersonaje.play();
-//   });
-// });
 
 
-// var sonido_bg =document.getElementById('background-music');
-// sonido_bg.preload = "auto";
 
-// var escogePersonaje =document.getElementById('elige-personaje');
-// escogePersonaje.preload = "auto";
-
-//accion.addEventListener("click", colocarAvatar);
 
 var conten=document.getElementById("contenAvatares");
 
-//var datos=JSON.parse(localStorage.getItem("avatares"));
-//var imagenesJson=JSON.parse(localStorage.getItem("imagenes"));
+
 var mostra="";
 
 
@@ -36,11 +19,27 @@ req.open("GET", server+"/front/consultUserId"+indice, false);
 req.send(null);
 avatar= JSON.parse(req.responseText);
 console.log("sesion");
-
 //  localStorage.clear();
   localStorage.setItem("sesion",JSON.stringify(avatar.usuarios));
 
+
+  //variable para manejar el tiempo
+
+//   var tiempo = avatar.usuarios.tiempo;
+//   console.log(tiempo);
+//   tiempo= tiempo.substring(18, 19);
+//     tiempo=parseInt(tiempo, 10);
+
+//     setTimeout(redireccionar, tiempo*1000);
+
+// console.log("sesion");
+
+
 }
+
+// function redireccionar(){
+//   window.location= "/front/game";
+// }
 
 //var descargar=document.getElementById("export-button");
 //descargar.addEventListener('click', exportJSON);
