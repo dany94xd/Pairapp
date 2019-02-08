@@ -6,7 +6,7 @@ const knex = require('../db/knex');
 
 router.get('/', (req, res) => {
     knex('partida')
-    .select("partida.id", "partida.puntaje as partida", "partida.idusuario", "usuario.id as usuario.id_usuario", "usuario.foto", "usuario.nombre")
+    .select("partida.id", "partida.puntaje as partida", "partida.idusuario", "usuario.id as usuario.id_usuario", "usuario.foto", "usuario.nombre" ,"usuario.puntaje")
     .innerJoin('usuario', function () {
     this
     .on('partida.idusuario','usuario.id')

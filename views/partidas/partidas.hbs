@@ -22,10 +22,11 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
 <table class="table table-bordered">
     <thead>
     <tr>
-      <th>Numero de Partida</th>
+      <th># Partida</th>
         <th>Nombre Jugador</th>
         <th>Foto</th>
-        <th>puntaje Jugador</th>
+        <th>puntaje Partida</th>
+        <th>puntaje jugador</th>
 
               
 
@@ -41,7 +42,8 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
         <td>{{id}}</td>
         <td>{{nombre}}</td>
         <td><img src="{{foto}}" alt="" class="rounded-circle personalImg"></td>
-                <td>{{partida}}</td>
+        <td>{{partida}}</td>
+        <td>{{puntaje}}</td>
 
         <td><a href="/partidas/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
         </form>

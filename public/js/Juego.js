@@ -16,6 +16,8 @@ function getColCount(level) {
       return 3;
     case 3:
       return 4;
+      case 4:
+      return 5;
     default:
       return 2;
   }
@@ -143,12 +145,20 @@ class Juego {
     const cardB = juego.selectedCards.pop();
 
     if (cardA.image === cardB.image) {
+ var audiocorrecto = document.getElementById("correcto");
+ audiocorrecto.preload="auto"
+audiocorrecto.play();
+
       juego.puntos+=cardA.puntaje;
       avatar.puntaje+= cardA.puntaje;
       contCartasGiradas++;
       juego.updateScore();
       juego.checkNextLevel();
     } else {
+      var audiomal=document.getElementById("mal");
+      audiomal.preload="auto"
+      audiomal.play();
+
       cardA.hide();
       cardB.hide();
     }
@@ -183,6 +193,7 @@ class Juego {
   gotoNextLevel() {
     this.level += 1;
     if (this.level > 3) {
+     // if (this.level > 4) {
       // Fin del juego
       this.saveScore();
       this.gotoNextScreen();
@@ -233,6 +244,7 @@ class Juego {
         break;
     }
     const levelCards = this.genLevelCards(level);
+    console.log("CARTAS DEL NIVEL");
     console.log(levelCards);
     const levelCardsCount = Array.apply(null, levelCards).map(
       Number.prototype.valueOf,
@@ -244,9 +256,11 @@ class Juego {
       while (rndIndex === -1 || levelCardsCount[rndIndex] === 2) {
         rndIndex = this.getRand(levelCards.length, 0);
       }
+      console.log("JUSTO AQUI");
       console.log(rndIndex);
       levelCardsCount[rndIndex] += 1;
-      const c = new Card(i, this.cardsImages.imagenes[rndIndex]);
+      //const c = new Card(i, this.cardsImages.imagenes[rndIndex]);
+      const c = new Card(i, levelCards[rndIndex]);
       c.setClicker(this.flipCard);
       table.push(c);
     }
@@ -281,6 +295,33 @@ class Juego {
         break;
     }
     this.numeroCartas=maxCards;
-    return this.cardsImages.imagenes.slice(0, maxCards);
+    var index_azar = new Array();
+    var cartas_nivel = new Array();
+    for (let index = 0; index < maxCards; index++) {
+      var img_azar = Math.floor(Math.random() * this.cardsImages.imagenes.length);
+      console.log("RANDOM: "+ img_azar)
+      let repetida = false;
+      if (index_azar.length > 0){        
+        index_azar.forEach(element => {          
+          if (element == img_azar){            
+            repetida = true;  
+            console.log("azar: "+ img_azar + " Element:" + element);          
+          }
+        });
+      } else {
+        index_azar[0] = img_azar;
+        cartas_nivel[0] = this.cardsImages.imagenes[img_azar];        
+      }
+      if (repetida) {
+        index --;
+        console.log("repetida")
+      } else {
+        index_azar[index] = img_azar;
+        cartas_nivel[index] = this.cardsImages.imagenes[img_azar];
+        console.log("Total elementos: "+ index_azar.length);
+      }      
+    }
+    //return this.cardsImages.imagenes.slice(0, maxCards);
+    return cartas_nivel;
   }
 }
