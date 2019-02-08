@@ -35,9 +35,9 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
 </div>
 
 <form action="/imagenes/{{imagenes.id}}?_method=DELETE" method="post">
-  <a href="/imagenes/{{imagenes.id}}/edit" type="button" class="btn btn-default btn-warning">
+  {{!-- <a href="/imagenes/{{imagenes.id}}/edit" type="button" class="btn btn-default btn-warning">
   Editar
-  </a>
+  </a> --}}
   <button type="submit" class="btn btn-default btn-danger">
   Eliminar
   </button>
