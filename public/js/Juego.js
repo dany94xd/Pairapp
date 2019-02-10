@@ -168,7 +168,23 @@ actualizarPartida(){
 
 
 
-  // Actualiza el score en pantalla
+  // // // Actualiza el score en pantalla
+  // updateScore() {
+  //   console.log("puntos", this.puntos);
+  //   this.saveScore(); // Guarda el score
+
+  //   var req = new XMLHttpRequest();
+  //   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
+  //   const server=window.location.origin;//atrapa ruta del servidor
+  //   req.open("GET", server+"/front/updateScore"+avatar.id+avatar.puntaje ,false);
+
+  //   req.send(null);
+
+  //   this.root.find("#score").text(this.puntos);
+  // }
+
+
+
   updateScore() {
     console.log("puntos", this.puntos);
     this.saveScore(); // Guarda el score
@@ -176,12 +192,15 @@ actualizarPartida(){
     var req = new XMLHttpRequest();
     // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
     const server=window.location.origin;//atrapa ruta del servidor
-    req.open("GET", server+"/front/updateScore"+avatar.id+avatar.puntaje ,false);
-
-    req.send(null);
+    req.open("POST", server+"/front/updateScore" ,false);
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.send("puntos="+avatar.puntaje+"&id="+avatar.id);
 
     this.root.find("#score").text(this.puntos);
   }
+
+
+
 
   // Verifica si hay un match entre las cartas seleccionadas, almacenadas en selectedcards
   makeMatch() {

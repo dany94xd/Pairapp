@@ -82,10 +82,25 @@ router.get('/verRanking', (req, res) => {
 
 
 
-router.get('/updateScore:id:puntaje', function(req, res, next) {
+// router.post('/updateScore:id:puntaje', function(req, res, next) {
+//     //Pantalla para mostrar todos los usuario con rol 'N' (niño)
+// const idAvatar= req.params.id;
+// const puntajeavatar= req.params.puntaje;
+// knex("usuario")
+// .where("id", idAvatar)
+// .update({puntaje: puntajeavatar})
+// .then(()=>{
+//   res.json("usuario actualizado");
+//   });
+
+// });
+
+
+
+router.post('/updateScore', function(req, res, next) {
     //Pantalla para mostrar todos los usuario con rol 'N' (niño)
-const idAvatar= req.params.id;
-const puntajeavatar= req.params.puntaje;
+const idAvatar= req.body.id;
+const puntajeavatar= req.body.puntos;
 knex("usuario")
 .where("id", idAvatar)
 .update({puntaje: puntajeavatar})
