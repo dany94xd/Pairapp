@@ -18,19 +18,36 @@ console.log("felicidades");
 });
 
 //guardando partida
-router.get('/guardarPartida:id:puntos', (req, res) => {
-  const id= req.params.id;
-  const puntos=req.params.puntos;
-console.log(id);
-    knex('partida')
-    .returning('id')
-      .insert({puntaje: puntos, idusuario:id})
-      .then(ids => {
-        res.json(ids);
-      });
+router.post('/guardarPartida', (req, res) => {
+    const id= req.body.id;
+    const puntos=req.body.puntos;
+  console.log(id);
+      knex('partida')
+      .returning('id')
+        .insert({puntaje: puntos, idusuario:id})
+        .then(ids => {
+          res.json(ids);
+        });
+  
+  });
 
-});
 
+
+// //guardando partida anterior
+// router.get('/guardarPartida:id:puntos', (req, res) => {
+//     const id= req.params.id;
+//     const puntos=req.params.puntos;
+//   console.log(id);
+//       knex('partida')
+//       .returning('id')
+//         .insert({puntaje: puntos, idusuario:id})
+//         .then(ids => {
+//           res.json(ids);
+//           console.log(idusuario);
+  
+//         });
+  
+//   });
 
 //actualizando partida
 router.post('/updatePartida',function(req,res){
