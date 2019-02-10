@@ -46,6 +46,11 @@ class Juego {
     this.root = null;
     this.cardsImages = images;
     this.user = user;
+    this.id=0;
+
+
+    this.guardarPartida()
+
   }
 
   resetJuego() {
@@ -118,7 +123,34 @@ class Juego {
       }
       cardsContainer.append(row);
     }
+  
   }
+
+guardarPartida(){
+  var req = new XMLHttpRequest();
+  // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
+    const server=window.location.origin;//atrapa ruta del servidor
+   req.open("GET", server+"/front/guardarPartida"+avatar.id+this.puntos ,false);
+   req.send(null);
+   let id=JSON.parse(req.responseText);
+   this.id=parseInt(id,10);
+   console.log(id)
+}
+ 
+
+
+actualizarPartida(){
+   var req = new XMLHttpRequest();
+   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
+   const server=window.location.origin;
+   let id =this.id;
+   let puntaje=this.puntos;
+   req.open("POST", server+"/front/updatePartida", false);
+   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   req.send("puntos="+puntaje+"&id="+id);
+ }
+
+
 
   // Actualiza el score en pantalla
   updateScore() {
@@ -144,17 +176,20 @@ class Juego {
     const cardA = juego.selectedCards.pop();
     const cardB = juego.selectedCards.pop();
 
-    if (cardA.image === cardB.image) {
- var audiocorrecto = document.getElementById("correcto");
- audiocorrecto.preload="auto"
+if (cardA.image === cardB.image) {
+var audiocorrecto = document.getElementById("correcto");
+audiocorrecto.preload="auto"
 audiocorrecto.play();
 
       juego.puntos+=cardA.puntaje;
       avatar.puntaje+= cardA.puntaje;
       contCartasGiradas++;
       juego.updateScore();
+      juego.actualizarPartida();
+
       juego.checkNextLevel();
     } else {
+
       var audiomal=document.getElementById("mal");
       audiomal.preload="auto"
       audiomal.play();
@@ -170,17 +205,16 @@ audiocorrecto.play();
     if (this.numeroCartas === contCartasGiradas  ) {
       contCartasGiradas=0;
       this.gotoNextLevel();
+    
+    //  this.actualizarPartida();
     }
   }
 
   // Avanza a pantalla de resultados
   gotoNextScreen() {
-    var req = new XMLHttpRequest();
-    // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
-    const server=window.location.origin;//atrapa ruta del servidor
-    req.open("GET", server+"/front/guardarPartida"+avatar.id+this.puntos ,false);
 
-    req.send(null);
+ 
+    
     window.location.href = "/front/felicidades";
   }
 

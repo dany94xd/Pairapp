@@ -17,16 +17,31 @@ console.log("felicidades");
     res.render('front/felicidades');
 });
 
-
+//guardando partida
 router.get('/guardarPartida:id:puntos', (req, res) => {
   const id= req.params.id;
   const puntos=req.params.puntos;
 console.log(id);
     knex('partida')
+    .returning('id')
       .insert({puntaje: puntos, idusuario:id})
       .then(ids => {
-        res.json("partida guarda");
+        res.json(ids);
       });
+
+});
+
+
+//actualizando partida
+router.post('/updatePartida',function(req,res){
+  const id=req.params.id;
+  const puntos=req.params.puntos;
+ knex('partida')
+ .where('id',req.body.id)
+ .update({puntaje:req.body.puntos})
+ .then(ids =>{
+     res.json("partida editada")
+  });
 
 });
 
