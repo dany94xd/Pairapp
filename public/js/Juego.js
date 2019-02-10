@@ -130,12 +130,28 @@ guardarPartida(){
   var req = new XMLHttpRequest();
   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
     const server=window.location.origin;//atrapa ruta del servidor
-   req.open("GET", server+"/front/guardarPartida"+avatar.id+this.puntos ,false);
-   req.send(null);
-   let id=JSON.parse(req.responseText);
+   req.open("POST", server+"/front/guardarPartida",false);
+   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   let idu=avatar.id;
+   let puntos=this.puntos;
+   req.send("puntos="+puntos+"&id="+idu);
+   let id = JSON.parse(req.responseText);
    this.id=parseInt(id,10);
-   console.log(id)
+   console.log(id);
 }
+
+
+//guardar partida anterior
+// guardarPartida(){
+//   var req = new XMLHttpRequest();
+//   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
+//     const server=window.location.origin;//atrapa ruta del servidor
+//    req.open("POST", server+"/front/guardarPartida"+avatar.id+this.puntos ,false);
+//    req.send(null);
+//    let id=JSON.parse(req.responseText);
+//    this.id=parseInt(id,10);
+//    console.log(id)
+// }
  
 
 
