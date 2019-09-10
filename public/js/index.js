@@ -20,6 +20,8 @@ req.send(null);
 avatar= JSON.parse(req.responseText);
 console.log("sesion");
 //  localStorage.clear();
+console.log(avatar.usuarios.id)
+alert(avatar.usuarios)
   localStorage.setItem("sesion",JSON.stringify(avatar.usuarios));
 
 

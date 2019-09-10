@@ -8,7 +8,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a href="/"> <img class="navbar-brand" src="../../images/logopairapp.png"></a>
+      <a href="/"> <img class="navbar-brand" src="../../images/logoDos.gif"></a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/admin">Admin</a></li>
@@ -24,13 +24,15 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
     <tr>
         <th>Imagen</th>
         <th>Puntaje</th>
+        <th>Nutricion</th>
     </tr>
     </thead>
     <tbody>
   {{#each imagenes}}
     <tr>
-        <td><img src="{{nombre}}" class="img-nombre" width="50" height="50"></td>
-        <td>{{puntaje}}</td>
+        <td><img src="{{rutaImg}}" class="img-rutaImg" width="50" height="50"></td>
+        <td>{{puntos}}</td>
+        <td>{{nutricion}}</td>
         <td><a href="/imagenes/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
         <td><a href="/imagenes/{{id}}" class="btn btn-primary" role="button">Eliminar</a></td>
     </tr>

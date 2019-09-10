@@ -144,8 +144,10 @@ router.get('/consultUserId:id', (req, res) => {
       .then((usuarios) => {
         if(usuarios!=undefined) {
           //res.redirect(/usuarios);
+          console.log("sesion");
+          console.log(usuarios);
           res.json({usuarios:usuarios});
-          console.log(res);
+         
           //res.render(login/sesion, {user:user})
         }
         else{

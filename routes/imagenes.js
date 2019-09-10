@@ -10,11 +10,36 @@ router.get('/', (req, res) => {
     knex('imagenjuego')
       .select()
       .then(imagenes => {
+      
         res.render('imagenes/imagenes', { imagenes: imagenes });
       });
   });
 
+  router.get('/responderFront', (req, res) => {
+    knex('imagenjuego')
+      .select()
+      .then(imagenes => {
+        res.json(imagenes);
+      });
+  });
+/* ACTUALIZA PUNTAJE DESDE EL JUEGO*/
+ router.post('/actualizapuntos', (req, res) => {
+   let usuario=req.body;
+   datos=JSON.parse(usuario.usuario)
+   id=datos.id
+   puntaje=datos.puntos
 
+   console.log(id)
+   console.log(puntaje)
+  knex('usuario')
+  .where('id', id)
+  .update({puntaje:puntaje})
+  .then(imagenes => {
+    res.json(imagenes);
+ 
+  });
+   
+});
 
 //localhost:3000/usuarios/agregar
 router.get('/agregar', (req, res) => {
@@ -64,6 +89,8 @@ router.get('/:id', (req, res) => {
     });
   });
 
+
+
   router.delete('/:id', (req, res) => {
     const id = req.params.id;
     if(validId(id)) {
@@ -85,8 +112,9 @@ router.get('/:id', (req, res) => {
     //if(validTodo(req.body)) {
 
       const imagen = {
-        nombre: req.body.input_nombre,
-        puntaje: req.body.puntaje
+        rutaImg: req.body.input_nombre,
+        puntos: req.body.puntos,
+        nutricion: req.body.nutricion
       };
 
       console.log(imagen);

@@ -14,6 +14,9 @@ var routes = require('./routes/index');
 var usuarios = require('./routes/usuarios');
 var imagenes = require('./routes/imagenes');
 var partidas = require('./routes/partidas');
+
+//recordar requerir la nueva ruta
+var alimetos = require('./routes/alimentos');
 //var preguntas = require('./routes/preguntas');
 var front = require('./routes/front');
 //var tareas = require('./routes/tareas');
@@ -57,6 +60,10 @@ app.use('/usuarios',usuarios);
 app.use('/imagenes',imagenes);
 app.use('/partidas',partidas);
 app.use('/front',front);
+
+
+//recordar usar la nueva ruta
+app.use('/alimentos',alimetos)
 //app.use('/explicacion',iniciar);
 
 // catch 404 and forward to error handler

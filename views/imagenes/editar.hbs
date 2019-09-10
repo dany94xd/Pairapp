@@ -8,7 +8,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <img class="navbar-brand" src="../../images/logopairapp.png">
+      <img class="navbar-brand" src="../../images/logoDos.gif">
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/admin">Admin</a></li>
@@ -21,17 +21,22 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
 
 <form class="form" action="/imagenes/{{imagenes.id}}?_method=PUT" method="post">
   <div class="form-group">
-    <label for="puntaje">Puntaje:</label>
-    <input type="text" class="form-control" id="puntaje" placeholder="Puntaje de la carta" name="puntaje" value="{{imagenes.puntaje}}">
+    <label for="puntos">Puntaje:</label>
+    <input type="text" class="form-control" id="puntos" placeholder="Puntaje de la carta" name="puntos" value="{{imagenes.puntos}}">
   </div>
     <div class="form-group">
     <label for="title">Foto:</label>
     <input type="file" class="form-control" id="fotoavatar_editar">
   </div>
   <div class="form-group">
-    <img src="{{imagenes.nombre}}" id="img_fotoavatar" width="100" height="100">
-    <input type="input" class="form-control hidden" id="img_fotoavatar_" name="input_fotoavatar" value="{{imagenes.nombre}}">
+    <img src="{{imagenes.rutaImg}}" id="img_fotoavatar" width="100" height="100">
+    <input type="input" class="form-control hidden" id="img_fotoavatar_" name="input_fotoavatar" value="{{imagenes.rutaImg}}">
   </div>
+  <div class="form-group">
+    <label for="nutricion">Nutricion:</label>
+    <input type="text" class="form-control" id="nutricion" placeholder="Nutricion segun lonchera" name="nutricion" value="{{imagenes.nutricion}}">
+  </div>
+  
   <!--<div class="form-group">
     <img src="" alt="" id="foto_perfil_">
   </div>-->

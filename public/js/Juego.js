@@ -2,395 +2,526 @@ var topGame= document.getElementById("idTopGame");
 var avatar =JSON.parse(localStorage.getItem("sesion"));
 //cadVariables=JSON.parse(localStorage.getItem("sesion"));
 var puntosTotal=avatar.puntos;
-// Obtiene la cantidad de filas por nivel
-function getRowCount(level) {
-  return 2;
-}
 
-// Obtiene la cantidad de columnas por nivel
-function getColCount(level) {
-  switch (level) {
-    case 1:
-      return 2;
-    case 2:
-      return 3;
-    case 3:
-      return 4;
-      case 4:
-      return 5;
-    default:
-      return 2;
+
+
+var ruta="../"
+var imagenes=[]
+var tagImagenes=[]
+var verifadorLeche = true;  
+var verifadorYogurt = true;
+var verifadorPlatano = true;
+var verifadorPan = true;
+var verifadorZanahoria = true;
+var verifadorTomate = true;
+var verifadorNranja = true;
+
+
+class alimento {
+  constructor(id,image){
+    this.image = image.nombre
+    this.id = id;
+    this.puntaje = image.puntaje
+    this.generaralimentos();
   }
 }
 
-// /Codigo del tiempo
-// function myTimer() {
 
-//     document.getElementById("tiempo").innerHTML = time;
-//     time++;
-// }
+function generaralimentos() {
+  var img= document.createElement("img")
+  img.src=val.rutaImg;
+  img.className= 'alimentos'
+  img.id=val.id
 
-// var time=0;
-//  var myVar = setInterval(myTimer, 1000);
-var contCartasGiradas=0;
-class Juego {
-  constructor(images, user) {
-    this.tablero = [];
-    this.selectedCards = [];
-    this.numeroCartas=0;
-    this.shownCount = 0;
-
-    this.puntos = 0;
-    this.level = 1;
-
-    this.root = null;
-    this.cardsImages = images;
-    this.user = user;
-    this.id=0;
-
-
-    this.guardarPartida()
-
+  puntos = parseInt(val.puntos,10)
+  let newElement={
+    id:val.id,
+    puntos:puntos,
+    rutaImg:val.rutaImg,
+    name:val.name,
+    sonido:val.sonido,
+    nutricion:val.nutricion
   }
 
-  resetJuego() {
-    this.tablero = this.genTablero(1);
-    this.puntos = 0;
-  }
-
-  getRand(max, min) {
-    return Math.floor(Math.random() * (max - min));
-  }
-
-  // Punto inicial de la carga del juego, el selector dado es seleccionado como raíz y el juego es renderizado dentro del mismo
-  mount(selector) {
-    this.root = $(selector);
-    this.bootstrap();
-  }
+}
 
 
 
-
-  // Elementos de bootstrap son cargadas y el tablero es generado(PINTADO), segunda parte de la carga del juego.
-  bootstrap() {
-    //const userImage = this.user + "_image";
-
-  // var time=0;
-  // var myVar = setInterval(myTimer, 1000);
-
-    const userImage = this.user
-    const scoreBoard = $(
-      '<div class="row"><div class="col "> <h2>Puntos: <span  id="score"></span></h2></div></div>'
-    );
-
-
-    /*&&&&&****PRUEBA******&&&&*/
-    const scoreBoardDOS = $(
-      '<div class="row"><div class="col"><img id="avatar" src="' +
-        userImage +
-        '" /><h2>Puntos: <span id="score"></span></h2></div></div>'
-    );
-    //topGame.append(scoreBoardDOS);
-    /******%%%% fin prueba%%%%%%*/
-
-
-    this.root.append(scoreBoard);
-    const tablero = $('<div id="tablero"></div>');
-    this.root.append(tablero);
-    this.genTablero(this.level);
-    this.serveCards();
-    this.updateScore();
-  }
-
-  colocarAvatar(nombre){
-    let img = document.getElementById("avatar");
-    //var nombre="avatar1.png";
-    img.innerHTML="<img class='img-responsive' src="+nombre.nombre+">";
-  }
-
-
-  // Genera html para visualizar las cartas del tablero y la inserta en el div con #tablero
-  serveCards() {
-    console.log(this.tablero);
-    const rows = getRowCount(this.level);
-    const cols = getColCount(this.level);
-    const cardsContainer = this.root.children("#tablero");
-    for (let r = 0; r < rows; r++) {
-      const row = $('<div class="card-deck img-thumbnail"></div>');
-      for (let c = 0; c < cols; c++) {
-        const card = this.tablero[r * cols + c];
-        row.append(card.domNode);
-      }
-      cardsContainer.append(row);
-    }
+$(document).ready(function() {
+ 
+ 
   
-  }
-
-guardarPartida(){
-  var req = new XMLHttpRequest();
-  // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
-    const server=window.location.origin;//atrapa ruta del servidor
-   req.open("POST", server+"/front/guardarPartida",false);
-   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   let idu=avatar.id;
-   let puntos=this.puntos;
-   req.send("puntos="+puntos+"&id="+idu);
-   let id = JSON.parse(req.responseText);
-   this.id=parseInt(id,10);
-   console.log(id);
-}
-
-
-//guardar partida anterior
-// guardarPartida(){
-//   var req = new XMLHttpRequest();
-//   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
-//     const server=window.location.origin;//atrapa ruta del servidor
-//    req.open("POST", server+"/front/guardarPartida"+avatar.id+this.puntos ,false);
-//    req.send(null);
-//    let id=JSON.parse(req.responseText);
-//    this.id=parseInt(id,10);
-//    console.log(id)
-// }
- 
-
-
-actualizarPartida(){
-   var req = new XMLHttpRequest();
-   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
-   const server=window.location.origin;
-   let id =this.id;
-   let puntaje=this.puntos;
-   req.open("POST", server+"/front/updatePartida", false);
-   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   req.send("puntos="+puntaje+"&id="+id);
- }
-
-
-
-  // // // Actualiza el score en pantalla
-  // updateScore() {
-  //   console.log("puntos", this.puntos);
-  //   this.saveScore(); // Guarda el score
-
-  //   var req = new XMLHttpRequest();
-  //   // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
-  //   const server=window.location.origin;//atrapa ruta del servidor
-  //   req.open("GET", server+"/front/updateScore"+avatar.id+avatar.puntaje ,false);
-
-  //   req.send(null);
-
-  //   this.root.find("#score").text(this.puntos);
-  // }
-
-
-
-  updateScore() {
-    console.log("puntos", this.puntos);
-    this.saveScore(); // Guarda el score
-
-    var req = new XMLHttpRequest();
-    // Petición HTTP GET síncrona hacia el archivo fotos.json del servidor
-    const server=window.location.origin;//atrapa ruta del servidor
-    req.open("POST", server+"/front/updateScore" ,false);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    req.send("puntos="+avatar.puntaje+"&id="+avatar.id);
-
-    this.root.find("#score").text(this.puntos);
-  }
-
-
-
-
-  // Verifica si hay un match entre las cartas seleccionadas, almacenadas en selectedcards
-  makeMatch() {
-    if (juego.selectedCards.length < 2) {
-      return;
-    }
-
-    const cardA = juego.selectedCards.pop();
-    const cardB = juego.selectedCards.pop();
-
-if (cardA.image === cardB.image) {
-var audiocorrecto = document.getElementById("correcto");
-audiocorrecto.preload="auto"
-audiocorrecto.play();
-
-      juego.puntos+=cardA.puntaje;
-      avatar.puntaje+= cardA.puntaje;
-      contCartasGiradas++;
-      juego.updateScore();
-      juego.actualizarPartida();
-
-      juego.checkNextLevel();
-    } else {
-
-      var audiomal=document.getElementById("mal");
-      audiomal.preload="auto"
-      audiomal.play();
-
-      cardA.hide();
-      cardB.hide();
-    }
-
-  }
-
-  // Verifica si la puntuación es la suficiente para avanzar de nivel
-  checkNextLevel() {
-    if (this.numeroCartas === contCartasGiradas  ) {
-      contCartasGiradas=0;
-      this.gotoNextLevel();
-    
-    //  this.actualizarPartida();
-    }
-  }
-
-  // Avanza a pantalla de resultados
-  gotoNextScreen() {
-
- 
-    
-    window.location.href = "/front/felicidades";
-  }
-
-  //Guarda la puntuacion en el localstorage
-  saveScore() {
-    localStorage.setItem(this.user + "_score", this.puntos);
-  }
-
-  // Avanza al siguiente nivel, limpiando el tablero y generando otro con el nuevo nivel
-  gotoNextLevel() {
-    this.level += 1;
-    if (this.level > 3) {
-     // if (this.level > 4) {
-      // Fin del juego
-      this.saveScore();
-      this.gotoNextScreen();
-   avatar.puntos+=puntosTotal;
-   let arrayAvatares= JSON.parse(localStorage.getItem("personajes"));
-   for (var variable in arrayAvatares) {
-     if (arrayAvatares[variable].id==avatar.id) {
-        arrayAvatares[variable].puntos=avatar.puntos;
-
-        localStorage.setItem("personajes", JSON.stringify(arrayAvatares));
-     }
-   }
-    }
-    this.clearBoard();
-    this.genTablero(this.level);
-    this.serveCards();
-    this.updateScore();
-  }
-
-  // Limpia el tablero, cartas seleccionadas y el html de #tablero
-  clearBoard() {
-    this.tablero = [];
-    this.selectedCards = [];
-    this.shownCount = 0;
-    this.root.children("#tablero").empty();
-  }
-
-  getRand(max, min) {
-    return Math.floor(Math.random() * (max - min));
-  }
-
-  genTablero(level) {
-    let maxCards = 0;
-    let table = [];
-    switch (level) {
-      case 1:
-        maxCards = 4;
-
-        break;
-      case 2:
-        maxCards = 6;
-        break;
-      case 3:
-        maxCards = 8;
-        break;
-      default:
-        maxCards = 0;
-        break;
-    }
-    const levelCards = this.genLevelCards(level);
-    console.log("CARTAS DEL NIVEL");
-    console.log(levelCards);
-    const levelCardsCount = Array.apply(null, levelCards).map(
-      Number.prototype.valueOf,
-      0
-    ); // https://stackoverflow.com/questions/1295584/most-efficient-way-to-create-a-zero-filled-javascript-array
-    console.log(levelCards, levelCardsCount);
-    for (let i = 0; i < maxCards; i++) {
-      let rndIndex = -1;
-      while (rndIndex === -1 || levelCardsCount[rndIndex] === 2) {
-        rndIndex = this.getRand(levelCards.length, 0);
+  $.getJSON("json/archivo.json", function(data){
+  console.log(data)
+    $.each(data, function(key, val){
+      var img= document.createElement("img")
+  
+     img.src=val.rutaImg;
+     img.className= 'alimentos'
+     img.id=val.id
+     puntos=parseInt(val.puntos, 10);
+      let newElement ={
+        id:val.id,
+        puntos:puntos,
+        rutaImg:val.rutaImg,
+        name:val.name,
+        sonido:val.sonido,
+        nutricion:val.nutricion
       }
-      console.log("JUSTO AQUI");
-      console.log(rndIndex);
-      levelCardsCount[rndIndex] += 1;
-      //const c = new Card(i, this.cardsImages.imagenes[rndIndex]);
-      const c = new Card(i, levelCards[rndIndex]);
-      c.setClicker(this.flipCard);
-      table.push(c);
+  
+      imagenes.push(newElement)
+      tagImagenes.push(img)
+      console.log(tagImagenes)
+    });
+    console.log(tagImagenes.length)
+    for (let i=0;i<tagImagenes.length;i++){
+      if(imagenes[i].nutricion=="reguladores"){
+        console.log("reg")
+      tagImagenes[i].className+=' reguladores'
+        $("#reguladores").append(tagImagenes[i])
+      }else if(imagenes[i].nutricion=="dañinos"){
+        console.log("da")
+        tagImagenes[i].className+=' dañinos'
+        $("#dañinos").append(tagImagenes[i])
+      }else if(imagenes[i].nutricion=="energeticos"){
+        console.log("en")
+        tagImagenes[i].className+=' energeticos'
+        $("#energeticos").append(tagImagenes[i])
+      }else if(imagenes[i].nutricion=="contructores"){
+        console.log("con")
+        tagImagenes[i].className+=' contructores'
+  
+        $("#contructores").append(tagImagenes[i])
+      }
+      console.log("imganes")
+      console.log(tagImagenes[i])
+     
     }
-    this.tablero = table;
-  }
-
-  // Le da vuelta a una carta, es llamado cuando le das click a una carta
-  flipCard(e) {
-    const card = e.data;
-    if (card.isShown()) {
-      console.log("already Shown");
-      return;
-    }
-    juego.selectedCards.push(card);
-    card.show();
-    setTimeout(juego.makeMatch, 400);
-  }
-
-  genLevelCards(level) {
-    let maxCards = 0;
-    switch (level) {
-      case 1:
-        maxCards = 2;
-        break;
-      case 2:
-        maxCards = 3;
-        break;
-      case 3:
-        maxCards = 4;
-        break;
-      default:
-        break;
-    }
-    this.numeroCartas=maxCards;
-    var index_azar = new Array();
-    var cartas_nivel = new Array();
-    for (let index = 0; index < maxCards; index++) {
-      var img_azar = Math.floor(Math.random() * this.cardsImages.imagenes.length);
-      console.log("RANDOM: "+ img_azar)
-      let repetida = false;
-      if (index_azar.length > 0){        
-        index_azar.forEach(element => {          
-          if (element == img_azar){            
-            repetida = true;  
-            console.log("azar: "+ img_azar + " Element:" + element);          
+    /*for (let i=0;i<imagenes.length;i++){
+      if (imagenes[i].nutricion=="dañinos") {
+        $('.dañinos').removeClass('alimentos').addClass('ADañados');
+    
+      }
+    }*/
+    
+  var puntajeJuego = 0 ; 
+  var contadorLonchera=0
+  var audioElement = document.createElement('audio');
+  
+  var audiohamburguesa = document.createElement('audio');
+  audiohamburguesa.setAttribute('src', 'audio/hamburguesa.mp3');        
+  
+  var audioPizza = document.createElement('audio');
+  audioPizza.setAttribute('src', 'audio/pizza.mp3');    
+  
+  var audioCocacola = document.createElement('audio');
+  audioCocacola.setAttribute('src', 'audio/cocacola.mp3'); 
+  
+  var audioLeche = document.createElement('audio');
+  audioLeche.setAttribute('src', 'audio/leche.mp3');
+  
+  var audioYogurt = document.createElement('audio');
+  audioYogurt.setAttribute('src', 'audio/yogurt.mp3');
+  
+  var audioPlatano = document.createElement('audio');
+  audioPlatano.setAttribute('src', 'audio/platano.mp3');
+  
+  var audioPanIntegral = document.createElement('audio');
+  audioPanIntegral.setAttribute('src', 'audio/panIntegral.mp3');
+  
+  var audioZanahoria = document.createElement('audio');
+  audioZanahoria.setAttribute('src', 'audio/zanahoria.mp3');
+  
+  var audioTomate = document.createElement('audio');
+  audioTomate.setAttribute('src', 'audio/tomate.mp3');
+  
+  var audioNnaranja = document.createElement('audio');
+  audioNnaranja.setAttribute('src', 'audio/naranja.mp3');
+  
+  
+  var bienHecho = document.createElement('audio');
+  bienHecho.setAttribute('src', 'audio/bienhecho.mp3');
+  
+  var malo = document.createElement('audio');
+  malo.setAttribute('src', 'audio/malo.mp3');
+  
+  var hazArmado = document.createElement('audio');
+  hazArmado.setAttribute('src', 'audio/hazarmado.mp3');
+  
+  var ganaste = document.createElement('audio');
+  ganaste.setAttribute('src', 'audio/ganaste.mp3');
+  /*
+  $("a.external").click(function() { url = $(this).attr("href"); window.open(url, '_blank'); return false; });*/
+  $(".alimentos").draggable({ 
+  
+   helper:"clone",
+    drag: function(event, ui)
+      { 
+        console.log($ (this).attr('id'))
+         imagenes.forEach(element=>{    
+          if($(this).attr('id')==element.id){
+            if(element.sonido == "sonidoHambur"){  
+              audiohamburguesa.play();
+              return
+            }
+            if(element.sonido == "sonidoPizza") {          
+              audioPizza.play();
+            }
+            if(element.sonido== "sonidoCola") {
+              audioCocacola.play();
+              return
+            }
+         
+          if(element.sonido== "sonidoLeche") {
+            $('#contructores').find( this).each(function() {     
+              if (verifadorLeche == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorLeche = true;
+              }              
+            });
+            audioLeche.play();
+            return
           }
-        });
-      } else {
-        index_azar[0] = img_azar;
-        cartas_nivel[0] = this.cardsImages.imagenes[img_azar];        
+          if(element.sonido == "sonidoYogurt") {
+            $('#contructores').find( this).each(function() {
+          
+              if (verifadorYogurt == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorYogurt = true;
+              }              
+            });
+            audioYogurt.play();
+            return
+          }
+          if(element.sonido == "sonidoPlatano") {
+            $('#energeticos').find( this).each(function() {
+          
+              if (verifadorPlatano == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorPlatano = true;
+              }              
+            });
+            audioPlatano.play();
+            return
+          }
+          if(element.sonido == "sonidoPan") {
+            $('#energeticos').find( this).each(function() {     
+              if (verifadorPan == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorPan = true;
+              }              
+            });
+            audioPanIntegral.play();
+            return
+          }
+          if(element.sonido == "sonidoZanahoria") {
+            $('#reguladores').find( this).each(function() {      
+              if (verifadorZanahoria == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorZanahoria = true;        
+              }              
+            });
+            audioZanahoria.play();
+            return
+          }
+          if(element.sonido == "sonidoTomate") {
+            $('#reguladores').find( this).each(function() {     
+              if (verifadorTomate == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorTomate = true;            
+              }              
+            });
+            audioTomate.play();
+            return
+          }
+          if(element.sonido == "sonidoNaranaja") {
+            $('#reguladores').find( this).each(function() {      
+              if (verifadorNranja == false) {
+                puntajeJuego -= element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera--
+                verifadorNranja = true;  
+                console.log(contNranja + "dddddddd")
+              }              
+            });
+            audioNnaranja.play();
+            return
+          }
+        }
+         })
       }
-      if (repetida) {
-        index --;
-        console.log("repetida")
-      } else {
-        index_azar[index] = img_azar;
-        cartas_nivel[index] = this.cardsImages.imagenes[img_azar];
-        console.log("Total elementos: "+ index_azar.length);
-      }      
-    }
-    //return this.cardsImages.imagenes.slice(0, maxCards);
-    return cartas_nivel;
-  }
-}
+  });
+    
+  
+  $(".lonchCont").droppable({
+    accept: ".alimentos",
+    /*accept:  function( draggable ){   if (!$(this).hasClass('alimentos') || draggable.hasClass('ADañados')){   return true;}
+      return false;
+    },*/
+  
+  
+    hoverClass: 'hovering',
+      drop: function( ev, ui ) {
+        imagenes.forEach(element=> {
+          if($(ui.draggable).attr('id')==element.id){
+          console.log(element.puntos)
+          console.log(puntajeJuego)
+          ui.draggable.detach();   
+          let contene=element.id;
+           // console.log($ (ui.draggable).attr("class"))
+           console.log("contadorLonchera")
+            console.log(contadorLonchera)
+            console.log(contene + "ssss")
+            if(contadorLonchera<4){
+              
+            if ($ (ui.draggable).hasClass( "dañinos") ) {
+              $("#dañinos").append(ui.draggable)          
+             malo.play();
+              return 
+            }
+            if ($ (ui.draggable).hasClass("contructores")) {
+              $( ".cont1" ).append( ui.draggable  );
+  
+              if (verifadorLeche == true && contene == 4) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++
+                verifadorLeche = false;
+              }
+              if (verifadorYogurt == true && contene == 5) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++
+                verifadorYogurt = false;
+              }         
+              return
+            }
+            if ($ (ui.draggable).hasClass("energeticos")) {
+              $( ".cont2" ).append( ui.draggable );
+              if (verifadorPlatano == true && contene == 6) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++
+                verifadorPlatano = false;
+              }
+              if (verifadorPan == true && contene == 7) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++
+                verifadorPan = false;
+              }
+              return
+            }
+  
+            if ($ (ui.draggable).hasClass("reguladores")) {
+              $( ".cont3" ).append( ui.draggable /*, audioElement.play()*/ ); 
+             
+              if (verifadorZanahoria == true && contene == 8) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++  
+                verifadorZanahoria = false;
+              }
+              if (verifadorTomate == true && contene == 9) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++
+                verifadorTomate = false;
+              } 
+              if (verifadorNranja == true && contene == 10) {
+                puntajeJuego += element.puntos;
+                $(".puntaje").text(puntajeJuego.toString())
+                contadorLonchera++
+                verifadorNranja = false;             
+              }                
+              bienHecho.play();
+              return
+          }
+          
+            }else{
+              let contenedor=element.nutricion;
+              console.log(contenedor)
+              $("#"+contenedor).append( ui.draggable )
+              // window.alert("lonchera llena tu puntaje es " +puntajeJuego );
+              $(".puntaje2").text(puntajeJuego.toString())
+          /* se cear el json  */
+              createJSON();
+              function createJSON() {            
+                var textRegu =  "";
+                var textConst=  "";
+                var textEnerg =  "";
+                textRegu =  "";
+                textConst=  "";
+                textEnerg =  "";
+                console.log(textEnerg)
+                $('#lonchRegu').find( '.reguladores').each(function() {   
+                  imagenes.forEach(element=> {
+                     if(element.id == this.id ){
+                      textRegu += element.name +" "
+                     }
+                  })                            
+                });
+                    var res = textRegu.slice(0, -1);
+                   let valores=res.split(" ");
+  
+                   $('#lonchContru').find( '.contructores').each(function() {   
+                    imagenes.forEach(element=> {
+                       if(element.id == this.id ){
+                        textConst += element.name +" "
+                       }
+                    })                            
+                  });
+                      var res2 = textConst.slice(0, -1);
+                     let valores2=res2.split(" ");
+  
+                     $('#lonchEnerg').find( '.energeticos').each(function() {   
+                      imagenes.forEach(element=> {
+                         if(element.id == this.id ){
+                          textEnerg += element.name +" "
+                         }
+                      })                            
+                    });
+                        var res3 = textEnerg.slice(0, -1);
+                       let valores3=res3.split(" ");
+  
+               var descarga = JSON.stringify({ puntaje : puntajeJuego , 
+                  alimentos : [{constuctor :[ valores2 ], energeticos: [ valores3 ], reguladores :[ valores ] }] });
+              $('#descarga').show("slow").click(function(e) {         
+                let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(descarga);        
+                let exportFileDefaultName = '../objetos.json';        
+                let linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+              linkElement.click(); 
+              })               
+            }
+            /* termina el codigo del json  */ 
+               window.location.href = "ganador.html";
+                hazArmado.play();
+                $(".puntaje2").text(puntajeJuego.toString())         
+            }  
+        }
+        })
+       $(".puntaje").text(puntajeJuego.toString())
+      },
+      /*
+      out: function( event, ui ) {
+        imagenes.forEach(element=> {
+          if($(ui.draggable).attr('id')==element.id){
+  
+       if ($ (ui.draggable).hasClass("reguladores")) {
+          $("#reguladores").append(ui.draggable)
+          return
+      }
+      if ($ (ui.draggable).hasClass("contructores")) {
+        $("#contructores").append(ui.draggable)
+        return
+      }
+      if ($ (ui.draggable).hasClass("energeticos")) {
+        $("#energeticos").append(ui.draggable)
+        return
+      }
+          }
+        })
+      }  */
+  });
+  
+  $("#contructores").droppable({
+    accept: ".contructores",
+   
+    hoverClass: 'hovering',
+      drop: function( ev, ui ) {
+        imagenes.forEach(element=>{    
+          if($(ui.draggable).attr('id')==element.id){
+            let contene=element.id;
+            $( "#contructores" ).append( ui.draggable  );
+            $('#descarga').hide( "slow");
+            if (verifadorLeche == false  && contene == 4) {
+              puntajeJuego -= element.puntos;
+              $(".puntaje").text(puntajeJuego.toString())
+              contadorLonchera--
+              verifadorLeche = true;        
+            }  
+            if (verifadorYogurt == false  && contene == 5) {
+              puntajeJuego -= element.puntos;
+              $(".puntaje").text(puntajeJuego.toString())
+              contadorLonchera--
+              verifadorYogurt = true;            
+            }   
+          }});     
+        return
+      }})
+  $("#energeticos").droppable({
+    accept: ".energeticos",
+   
+    hoverClass: 'hovering',
+      drop: function( ev, ui ) {
+        imagenes.forEach(element=>{    
+          if($(ui.draggable).attr('id')==element.id){
+            let contene=element.id;
+            $( "#energeticos" ).append( ui.draggable  );   
+            $('#descarga').hide( "slow");    
+            if (verifadorPlatano == false  && contene == 6) {
+              puntajeJuego -= element.puntos;
+              $(".puntaje").text(puntajeJuego.toString())
+              contadorLonchera--
+              verifadorPlatano = true;        
+            }  
+            if (verifadorPan == false  && contene == 7) {
+              puntajeJuego -= element.puntos;
+              $(".puntaje").text(puntajeJuego.toString())
+              contadorLonchera--
+              verifadorPan = true;            
+            }   
+          }});     
+        return
+      }
+  })
+  $("#reguladores").droppable({
+    accept: ".reguladores", 
+    hoverClass: 'hovering',
+      drop: function( ev, ui ) {
+      imagenes.forEach(element=>{    
+        if($(ui.draggable).attr('id')==element.id){
+          let contene=element.id;
+          $( "#reguladores" ).append( ui.draggable  );
+          $('#descarga').hide( "slow");
+          if (verifadorZanahoria == false  && contene == 8) {
+            puntajeJuego -= element.puntos;
+            $(".puntaje").text(puntajeJuego.toString())
+            contadorLonchera--
+            verifadorZanahoria = true;        
+          }  
+          if (verifadorTomate == false  && contene == 9) {
+            puntajeJuego -= element.puntos;
+            $(".puntaje").text(puntajeJuego.toString())
+            contadorLonchera--
+            verifadorTomate = true;            
+          }  
+          if (verifadorNranja == false  && contene == 10 ) {
+            puntajeJuego -= element.puntos;
+            $(".puntaje").text(puntajeJuego.toString())
+            contadorLonchera--
+            verifadorNranja = true;  
+         
+          }  
+  
+        }});
+      
+      return
+      }
+  })
+  });
+  });

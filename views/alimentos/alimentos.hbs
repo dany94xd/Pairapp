@@ -1,0 +1,57 @@
+<script>
+if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') == undefined){
+    window.location = "/login";
+    console.log("login")
+}</script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/"> <img class="navbar-brand" src="../../images/logoDos.gif"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/admin">Admin</a></li>
+      <li ><a href="/usuarios">Usuarios</a></li>
+      <li ><a href="/partidas">Partidas</a></li>
+      <li ><a href="/imagenes">Imagenes</a></li>
+       <li ><a href="/alimentos">Alimentos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+     
+        <th>Nombre</th>
+         <th>Imagen</th> 
+         <th>Fecha</th>
+          <th>Precio</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+  {{#each alimentos}}
+    <tr>
+        
+        <td>{{nombre}}</td>
+      <td><img src="{{fotoalimento}}" class="img-nombre" width="50" height="50"></td> 
+        <td>{{fecha}}</td>
+        <td>{{precio}}</td>       
+
+        <td><a href="/alimentos/{{id}}/edit" class="btn btn-primary" role="button">Editar</a></td>
+        <td><a href="/alimentos/{{id}}" class="btn btn-primary" role="button">Eliminar</a></td>
+    </tr>
+  {{/each}}
+    </tbody>
+</table>
+
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <a type="button" class="btn btn-default btn-primary" href="/alimentos/agregar">Nueva Imagen</a>
+  </div>
+</div>

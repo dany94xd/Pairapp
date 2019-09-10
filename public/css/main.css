@@ -2,7 +2,7 @@
 
 /*para imagen de fondo*/
 body{
-	background: url("/images/iniciar.jpg") no-repeat center center fixed;
+	background: url("/images/fondo.jpg") no-repeat center center fixed;
 /*background-color: #BDBDBD;*/
 	-webkit-background-size: cover;
 	-moz-background-size: cover;

@@ -7,7 +7,7 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <img class="navbar-brand" src="../../images/logopairapp.png">
+      <img class="navbar-brand" src="../../images/logoDos.gif">
     </div>
     <ul class="nav navbar-nav">
       <li><a href="/admin">Admin</a></li>
@@ -30,10 +30,14 @@ if(localStorage.getItem('usuario') == null || localStorage.getItem('usuario') ==
   </div>
 
   <div class="form-group">
-    <label for="puntaje">Puntos:</label>
-    <input type="text" class="form-control" id="puntaje" placeholder="Puntos de imagen" name="puntaje"><!--req.body.name-->
+    <label for="puntos">Puntos:</label>
+    <input type="text" class="form-control" id="puntos" placeholder="Puntos de imagen" name="puntos"><!--req.body.name-->
   </div>
   
+  <div class="form-group">
+    <label for="nutricion">Nutricion:</label>
+    <input type="text" class="form-control" id="nutricion" placeholder="Nutricion" name="nutricion"><!--req.body.name-->
+  </div>
 
   <button type="submit" class="btn btn-default btn-success">
     Crear

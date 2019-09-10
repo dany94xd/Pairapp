@@ -40,3 +40,10 @@ if($('#nombre_editar').length) {
 
 }
 
+if($('#alimento_editar').length) {
+    $("#alimento_editar").change(function(){
+        readURL(this, "img_alimento", true);
+    });
+
+}
+

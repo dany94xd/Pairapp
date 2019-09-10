@@ -27,6 +27,8 @@ router.get('/:id', (req, res) => {
   respondAndRenderTodo(id, res, 'usuarios/ver');
 });
 
+
+
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id;
   respondAndRenderTodo(id, res, 'usuarios/editar');
