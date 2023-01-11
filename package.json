@@ -17,7 +17,7 @@
     "hbs": "~4.0.0",
     "helmet": "^3.13.0",
     "js-video-url-parser": "^0.2.7",
-    "knex": "^0.15.2",
+    "knex": "^2.4.0",
     "method-override": "^2.3.7",
     "morgan": "~1.7.0",
     "nodemon": "^1.19.2",
